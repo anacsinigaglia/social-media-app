@@ -5,7 +5,11 @@ const typeDefs = require('./src/graphql/typeDefs');
 const resolvers = require('./src/graphql/resolvers');
 const { MONGODB } = require('./config.js');
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({ req }), //we destructure the request body and pass it on, then we just call the context in the third argument
+});
 
 mongoose
   .connect(MONGODB, { useNewUrlParser: true })
