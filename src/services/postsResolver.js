@@ -1,30 +1,30 @@
-const { AuthenticationError, UserInputError } = require('apollo-server-errors');
-const Post = require('../models/Post');
-const checkAuth = require('../utils/checkAuth');
+import { AuthenticationError, UserInputError } from "apollo-server-errors";
+import Post, { find, findById } from "../models/Post";
+import checkAuth from "../utils/checkAuth";
 
-module.exports.getPostsResolver = async () => {
+export const getPostsResolver = async () => {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 }); //mongoose understands -1 to put the newests posts above
+    const posts = await find().sort({ createdAt: -1 }); //mongoose understands -1 to put the newests posts above
     return posts;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-module.exports.getPostResolver = async (_, { id }) => {
+export const getPostResolver = async (_, { id }) => {
   try {
-    const post = await Post.findById(id);
+    const post = await findById(id);
     if (post) {
       return post;
     } else {
-      throw new Error('Post not found');
+      throw new Error("Post not found");
     }
   } catch (err) {
     throw new Error(err);
   }
 };
 
-module.exports.createPostResolver = async (_, { body }, context) => {
+export const createPostResolver = async (_, { body }, context) => {
   const user = checkAuth(context);
 
   const newPost = new Post({
@@ -38,17 +38,17 @@ module.exports.createPostResolver = async (_, { body }, context) => {
   return post;
 };
 
-module.exports.deletePostResolver = async (_, { id }, context) => {
+export const deletePostResolver = async (_, { id }, context) => {
   const user = checkAuth(context);
 
   try {
-    const post = await Post.findById(id);
+    const post = await findById(id);
     if (post) {
       if (user.username === post.username) {
         await post.delete();
-        return 'Post deleted successfully';
+        return "Post deleted successfully";
       } else {
-        throw new AuthenticationError('Action not allowed');
+        throw new AuthenticationError("Action not allowed");
       }
     }
   } catch (err) {
@@ -56,16 +56,16 @@ module.exports.deletePostResolver = async (_, { id }, context) => {
   }
 };
 
-module.exports.createCommentResolver = async (_, { postId, body }, context) => {
+export const createCommentResolver = async (_, { postId, body }, context) => {
   const { username } = checkAuth(context);
 
-  if (body.trim() === '') {
-    throw new UserInputError('Empty comment', {
-      errors: { body: 'Comment body must not be empty' },
+  if (body.trim() === "") {
+    throw new UserInputError("Empty comment", {
+      errors: { body: "Comment body must not be empty" },
     });
   }
 
-  const post = await Post.findById(postId);
+  const post = await findById(postId);
   if (post) {
     post.comments.unshift({
       body,
@@ -74,16 +74,16 @@ module.exports.createCommentResolver = async (_, { postId, body }, context) => {
     });
     await post.save();
     return post;
-  } else throw new UserInputError('Post not found');
+  } else throw new UserInputError("Post not found");
 };
 
-module.exports.deleteCommentResolver = async (
+export const deleteCommentResolver = async (
   _,
   { postId, commentId },
   context
 ) => {
   const { username } = checkAuth(context);
-  const post = await Post.findById(postId);
+  const post = await findById(postId);
 
   if (post) {
     const commentIndex = post.comments.findIndex(
@@ -95,9 +95,9 @@ module.exports.deleteCommentResolver = async (
       await post.save();
       return post;
     } else {
-      throw new AuthenticationError('Action not allowed');
+      throw new AuthenticationError("Action not allowed");
     }
   } else {
-    throw new UserInputError('User not found');
+    throw new UserInputError("User not found");
   }
 };

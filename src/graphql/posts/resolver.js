@@ -1,18 +1,17 @@
-const {
+import {
   getPostsResolver,
   getPostResolver,
   createPostResolver,
   deletePostResolver,
   createCommentResolver,
   deleteCommentResolver,
-} = require('../../services/postsResolver');
+} from "../../services/postsResolver";
 
-module.exports = {
+const resolvers = {
   Query: {
     getPosts: getPostsResolver,
     getPost: getPostResolver,
   },
-
   Mutation: {
     createPost: createPostResolver,
     deletePost: deletePostResolver,
@@ -20,3 +19,5 @@ module.exports = {
     deleteComment: deleteCommentResolver,
   },
 };
+
+export default resolvers;

@@ -1,7 +1,6 @@
-const { mergeTypeDefs } = require('@graphql-tools/merge');
-const postsSchema = require('./posts/typedefs');
-const usersSchema = require('./users/typedefs');
+import { fileLoader, mergeTypes } from "merge-graphql-schemas";
+import path from "path";
 
-const types = [postsSchema, usersSchema];
+const typeArray = fileLoader(path.join(__dirname, "**", "*.graphql"));
 
-module.exports = mergeTypeDefs(types);
+export default mergeTypes(typeArray);
