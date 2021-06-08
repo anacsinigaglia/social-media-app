@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose');
+import { model, Schema } from "mongoose";
 
 const postSchema = new Schema({
   body: String,
@@ -19,8 +19,8 @@ const postSchema = new Schema({
   ],
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users', //oasses the table/collection is uses
+    ref: "users", //passes the table/collection is uses
   },
 });
 
-module.exports = model('Post', postSchema);
+export default model("Post", postSchema);

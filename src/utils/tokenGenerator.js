@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const { SECRET_KEY } = require('../../config');
+import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "../config";
 
-module.exports.generateToken = (user) => {
+export function generateToken(user) {
   return jwt.sign(
     {
       id: user.id,
@@ -9,6 +9,6 @@ module.exports.generateToken = (user) => {
       username: user.username,
     },
     SECRET_KEY,
-    { expiresIn: '1h' }
+    { expiresIn: "1h" }
   );
-};
+}

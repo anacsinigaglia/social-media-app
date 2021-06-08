@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "start": "npx nodemon --exec babel-node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,14 @@
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.5",
     "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.8",
     "mongoose": "^5.12.12"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.4",
     "nodemon": "^2.0.7"
   }
 }

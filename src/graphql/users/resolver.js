@@ -1,11 +1,10 @@
-const {
-  loginResolver,
-  registerResolver,
-} = require('../../services/usersResolver');
+import { loginResolver, registerResolver } from "../../services/usersResolver";
 
-module.exports = {
+const resolvers = {
   Mutation: {
     login: loginResolver,
     register: registerResolver,
   },
 };
+
+export default resolvers;
