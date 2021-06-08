@@ -1,8 +1,8 @@
-import { hash } from "bcryptjs";
-import { compare } from "bcrypt";
+import bcryptjs from "bcryptjs";
+import bcrypt from "bcrypt";
 import { UserInputError } from "apollo-server";
 
-import User, { findOne } from "../models/User";
+import User from "../models/User";
 import { validateRegisterInput, validateLoginInput } from "../utils/validators";
 import { generateToken } from "../utils/tokenGenerator";
 
@@ -13,13 +13,13 @@ export const loginResolver = async (_, { username, password }) => {
     throw new UserInputError("Errors", { errors });
   }
 
-  const user = await findOne({ username });
+  const user = await User.findOne({ username });
   if (!user) {
     errors.general = "User not found";
     throw new UserInputError("User not found", { errors });
   }
 
-  const matchPassword = await compare(password, user.password);
+  const matchPassword = await bcrypt.compare(password, user.password);
   if (!matchPassword) {
     errors.general = "Wrong credentials";
     throw new UserInputError("Wrong credentials", { errors });
@@ -50,7 +50,7 @@ export const registerResolver = async (
   }
 
   // verifies if the username is already taken
-  const user = await findOne({ username });
+  const user = await User.findOne({ username });
   if (user) {
     throw new UserInputError("Username is taken", {
       errors: {
@@ -61,7 +61,7 @@ export const registerResolver = async (
   }
 
   // hash password (to be impossible to read)
-  password = await hash(password, 12);
+  password = await bcryptjs.hash(password, 12);
 
   // create new user
   const newUser = new User({

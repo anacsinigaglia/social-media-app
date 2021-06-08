@@ -32,7 +32,7 @@ export const validateRegisterInput = (
   };
 };
 
-export const validateLoginInput = async (username, password) => {
+export const validateLoginInput = (username, password) => {
   const errors = {};
 
   if (username.trim() === "") {

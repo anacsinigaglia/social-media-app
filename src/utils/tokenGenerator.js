@@ -1,8 +1,8 @@
-import { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config";
 
 export function generateToken(user) {
-  return sign(
+  return jwt.sign(
     {
       id: user.id,
       email: user.email,

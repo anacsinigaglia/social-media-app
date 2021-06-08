@@ -5,6 +5,8 @@ import {
   deletePostResolver,
   createCommentResolver,
   deleteCommentResolver,
+  likePostResolver,
+  newPostResolver,
 } from "../../services/postsResolver";
 
 const resolvers = {
@@ -17,6 +19,12 @@ const resolvers = {
     deletePost: deletePostResolver,
     createComment: createCommentResolver,
     deleteComment: deleteCommentResolver,
+    likePost: likePostResolver,
+  },
+  Subscription: {
+    newPost: {
+      subscribe: newPostResolver,
+    },
   },
 };
 
