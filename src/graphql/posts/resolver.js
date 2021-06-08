@@ -26,6 +26,11 @@ const resolvers = {
       subscribe: newPostResolver,
     },
   },
+  Post: {
+    //parent = data that comes from getPosts
+    likeCount: (parent) => parent.likes.length,
+    commentCount: (parent) => parent.comments.length,
+  }, //any query or mutation that returns the Post must pass thru here, in this modifier
 };
 
 export default resolvers;
