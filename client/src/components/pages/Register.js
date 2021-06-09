@@ -69,7 +69,7 @@ function Register(props) {
         />
         <Form.Input
           label="Confirm Password"
-          placeholder="ConfirmPassword"
+          placeholder="Confirm Password"
           name="confirmPassword"
           type="password"
           value={values.confirmPassword}
