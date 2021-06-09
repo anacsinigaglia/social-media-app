@@ -2,8 +2,8 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Grid } from "semantic-ui-react";
 
-import PostCard from "../components/PostCard";
-import { GET_POSTS_QUERY } from "../graphql/Post";
+import { GET_POSTS_QUERY } from "../../graphql/Post";
+import PostCard from "../PostCard";
 
 function Home() {
   const {
