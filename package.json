@@ -1,0 +1,14 @@
+{
+  "name": "social-media-app",
+  "version": "1.0.0",
+  "description": "Social media app using React and GraphQL.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anacsinigaglia/social-media-app.git"
+  },
+  "dependencies": {
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3"
+  }
+}

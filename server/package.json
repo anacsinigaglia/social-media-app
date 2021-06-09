@@ -1,7 +1,7 @@
 {
-  "name": "social-media-app",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Social media app using React and GraphQL.\r Ro3WWIKoXoqoQKv2",
+  "description": "Server side of the App using GraphQL.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,13 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/anacsinigaglia/social-media-app.git"
   },
-  "keywords": [],
-  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/anacsinigaglia/social-media-app/issues"
-  },
-  "homepage": "https://github.com/anacsinigaglia/social-media-app#readme",
   "dependencies": {
     "apollo-server": "^2.25.0",
     "bcrypt": "^5.0.1",
